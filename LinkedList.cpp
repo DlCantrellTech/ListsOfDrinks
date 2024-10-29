@@ -5,10 +5,13 @@
  */
 
 #include "LinkedList.h"
+#include "ListNode.h"
+
 
 
 // default constructor
-LinkedList::LinkedList()
+template <typename typNode>
+LinkedList<typNode>::LinkedList()
 {
     head = NULL;
     tail = NULL;
@@ -16,7 +19,8 @@ LinkedList::LinkedList()
 }
 
 // constructor
-LinkedList::LinkedList( head, tail, int listSize)
+template <typename typNode>
+LinkedList<typNode>::LinkedList(typename ListNode<typNode>::NodeCell *head,typename ListNode<typNode>::NodeCell *tail, int listSize)
 {
     this->head = head;
     this->tail = tail;
@@ -24,7 +28,8 @@ LinkedList::LinkedList( head, tail, int listSize)
 }
 
 // destructor
-LinkedList::~LinkedList() {
+template <typename typNode>
+LinkedList<typNode>::~LinkedList() {
     while (head != NULL) {
         temp = head;
         head = head->next;
@@ -33,39 +38,46 @@ LinkedList::~LinkedList() {
 }
 
 // function prototypes
-void LinkedList::addTo()
+template <typename typNode>
+void LinkedList<typNode>::addTo()
 {
 
 }
 
-void LinkedList::removeFrom()
+template <typename typNode>
+void LinkedList<typNode>::removeFrom()
 {
 
 }
 
-void LinkedList::getFrom()
+template <typename typNode>
+void LinkedList<typNode>::getFrom()
 {
 
 }
 
 //getter
-int LinkedList::getListSize() {
+template <typename typNode>
+int LinkedList<typNode>::getListSize() {
     return listSize;
 }
 
 //setter
-void LinkedList::setListSize()
+template <typename typNode>
+void LinkedList<typNode>::setListSize()
 {
 
 }
 
 //friend function prototypes
-friend void LinkedList::sortList()
+template <typename typNode>
+void LinkedList<typNode>::sortList()
 {
 
 }
 
-ostream& operator<<(ostream& os, const LinkedList& LinkedList)
+template <typename typNode>
+ostream& operator<<(ostream& os, const LinkedList<typNode>& LinkedList)
 {
     os << "\n********************\n"
        << "\n********************\n" << endl;
