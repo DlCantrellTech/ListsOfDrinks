@@ -3,26 +3,24 @@
 
 using namespace std;
 
-template <class lNode>
+template <typename typNode>
 
-class listNode
+class ListNode
 {
     
     private:
-        struct nodeList
+        struct NodeCell
         {
-            lNode current;
-            nodeList *prev;
-            nodeList *next;
+            typNode value;
+            NodeCell *prev;
+            NodeCell *next;
 
-            ListNode (lNode *P,lNode *N): prev(P),next(N)
+            ListNode (typNode *P,typNode *N): prev(P),next(N)
             {
                 if(P) prev->next = this;
                 if(N) next->prev = this;
             } 
         };
-
-        nodeList *top;
         
     public:
 

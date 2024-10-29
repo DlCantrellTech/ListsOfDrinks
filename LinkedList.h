@@ -1,20 +1,29 @@
+/*  Tilte: ListNode.h
+ *  Author: Dalton Cantrell
+ *  Date: 10/23/24
+ *  Purpose: Declares LinkedList class
+ */
+
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
 #include <iostream>
+#include <ListNode.h>
 
 using namespace std;
 
+template <class lNode>  // !!!! may want to shift this code around
+
 class LinkedList {
     private:
-        // head node pointer
-        // tail node pointer
-       int listSize;
+        typename listNode<lNode>::nodeList* head; // !!!! may want to shift this code around
+        typename listNode<lNode>::nodeList* tail; // !!!! may want to shift this code around
+        int listSize;
 
     public:
         //constructor
         LinkedList();
-        LinkedList(/*head pointer data type*/,/*tail pointer data type*/, int);
+        LinkedList(nodeList*, nodeList*, int);
 
         //destructor
         ~LinkedList();
