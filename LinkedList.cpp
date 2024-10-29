@@ -31,7 +31,7 @@ LinkedList<typNode>::LinkedList(typename ListNode<typNode>::NodeCell *head,typen
 template <typename typNode>
 LinkedList<typNode>::~LinkedList() {
     while (head != NULL) {
-        temp = head;
+        LinkedList temp = head;
         head = head->next;
         delete temp;
     }

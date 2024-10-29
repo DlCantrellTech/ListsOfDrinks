@@ -12,18 +12,18 @@
 
 using namespace std;
 
-template <class lNode>  // !!!! may want to shift this code around
+template <typename typNode>
 
 class LinkedList {
     private:
-        typename listNode<lNode>::nodeList* head; // !!!! may want to shift this code around
-        typename listNode<lNode>::nodeList* tail; // !!!! may want to shift this code around
+        typename ListNode<typNode>::NodeCell *head;
+        typename ListNode<typNode>::NodeCell *tail;
         int listSize;
 
     public:
-        //constructor
+        //constructors
         LinkedList();
-        LinkedList(nodeList*, nodeList*, int);
+        LinkedList(typename ListNode<typNode>::NodeCell*, typename ListNode<typNode>::NodeCell*, int);
 
         //destructor
         ~LinkedList();
