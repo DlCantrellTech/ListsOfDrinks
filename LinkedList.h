@@ -34,6 +34,7 @@ class LinkedList {
         void removeFrom();
         void getFrom();
         void readIn();
+        void makeNew(); 
 
         //getter
         int getListSize();

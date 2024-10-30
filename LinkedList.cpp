@@ -293,3 +293,48 @@ void LinkedList<typNode>::readIn()
 
     input.close();
 }
+
+template <typename typNode>
+void LinkedList<typNode>::makeNew() 
+{
+    ofstream output;  // output file stream
+    string fileName;
+    string* ingredients;
+
+    cout << "\n\tEnter the name of the new library file (ex. myDrinks.txt): ";
+    cin >> fileName;
+    output.open(fileName);
+
+    // fail case
+    if (output.fail()) {
+        cout << "\n\t\tFailed to open output file." << endl;
+        return;
+    }
+
+    // Write drinks to the file using * as delimiter !!!!!!!!!!!!!!!!!!!! change
+    for (int i = 0; i < this->listSize; i++) {
+        output <<  << "*"
+               << drinks[i]->getAlcoholPercentage() << "*"
+               << drinks[i]->getPairing() << "*"
+               << drinks[i]->getRecipe()->getnumIngredients() << "*";
+
+        ingredients = drinks[i]->getRecipe()->getIngredients();
+        for (int j = 0; j < drinks[i]->getRecipe()->getnumIngredients(); j++) {
+            output << ingredients[j] << (j < drinks[i]->getRecipe()->getnumIngredients() - 1 ? "*" : "");
+        }
+
+        output << "*" 
+               << drinks[i]->getRecipe()->getGlassware() << "*" 
+               << drinks[i]->getRecipe()->getInstructions() << "*" << endl;
+    }
+
+    output.close();
+    cout << "\nNew drink library saved to " << fileName << endl;
+
+    //Clean up dynamically allocated ingredients
+    for (int i = 0; i < this->listSize; i++) {
+        delete drinks[i]; 
+    }
+    // clean up the drinks array
+    delete[] drinks;
+}

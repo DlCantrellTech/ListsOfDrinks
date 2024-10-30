@@ -27,7 +27,8 @@ int main () {
         else    // grab or start new library if list is empty
         {
             cout << "\n\t\tLibrary is Currently Empty!\n\n"
-            drinksList.readIn();
+            // !!!!!!!!! add drink
+            drinksList.addTo(value);
         }
         
         // display main menu
@@ -41,7 +42,7 @@ int main () {
                 // ListNode iterator use
                 break;
             case 3: //add drink
-                typNode value;
+                // !!!!!!!!! add drink
                 dinksList.addTo(value);
                 break;
             case 4: //save file
