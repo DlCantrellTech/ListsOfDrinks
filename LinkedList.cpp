@@ -263,8 +263,6 @@ void LinkedList<typNode>::readIn()
     input.clear();
     input.seekg(0);
 
-    this->listSize = numDrinks;    // set numDrinks to the equivalent class variable
-
     for (int i = 0; i < numDrinks; i++)
     {
         string name, pairing, glassware, instructions;
