@@ -19,6 +19,7 @@ class ListNode
             NodeCell *prev;
             NodeCell *next;
 
+            //Constructor for NodeCell 
             NodeCell (typNode val, typNode *P = nullptr, typNode *N = nullptr): value(val), prev(P),next(N)
             {
                 if(P) prev->next = this;
