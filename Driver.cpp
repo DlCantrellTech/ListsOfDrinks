@@ -6,6 +6,7 @@ using namespace std;
 //function prototypes
 int displayMenuGetChoice();
 int validateInt(string), validateInt(string, int, int);
+template <typename typNode>
 
 int main () {
     int choice;
@@ -18,7 +19,8 @@ int main () {
 
                 break;
             case 2: //add drink
-
+                typNode value;
+                LinkedList<typNode>.addTo(value);
                 break;
             case 3: //edit drink
 
@@ -44,7 +46,7 @@ int main () {
 //prints main menu
 int displayMenuGetChoice() {
 
-    return validateInt("\n--------------------------------------------\n\t\tDRINK LIBRARY\n--------------------------------------------\n\t1 - Display all Drinks\n\t2 - Add a Drink\n\t3 - Edit a Drink\n\t4 - Save New Drink Library\n\t5 - Change Library File\n\t6 - End the Program\n\nCHOICE: ", 6, 0);
+    return validateInt("\n--------------------------------------------\n\t\tDRINK LIBRARY\n--------------------------------------------\n\t1 - Next Drink\n\t2 - Previous Drink\n\t3 - Add a Drink\n\t4 - Edit a Drink\n\t5 - Save New Drink Library\n\t6 - Change Library File\n\t7 - End the Program\n\nCHOICE: ", 7, 0);
 
 }
 

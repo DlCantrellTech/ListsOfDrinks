@@ -29,7 +29,7 @@ class LinkedList {
         ~LinkedList();
 
         //function prototypes
-        void addTo();
+        void addTo(typNode value);
         void removeFrom();
         void getFrom();
 
