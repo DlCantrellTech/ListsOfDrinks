@@ -6,39 +6,44 @@ using namespace std;
 //function prototypes
 int displayMenuGetChoice();
 int validateInt(string), validateInt(string, int, int);
+void sortOptions();
 template <typename typNode>
 
 int main () {
     int choice;
-
+    readIn();
+    sortItOut();
     do {
         choice = displayMenuGetChoice();
 
         switch(choice) {
-            case 1: //print all drinks
-
+            case 1: //next drink
+                // ListNode iterator use
                 break;
-            case 2: //add drink
+            case 2: //previous drink
+                // ListNode iterator use
+                break;
+            case 3: //add drink
                 typNode value;
                 LinkedList<typNode>.addTo(value);
                 break;
-            case 3: //edit drink
+            case 4: //edit drink
 
                 break;
-            case 4: //save file
+            case 5: //save file
 
                 break;
-            case 5: //change file
+            case 6: //change file
                 
                 break;
-            case 6: //exit program
+            case 7: //exit program
                 cout << "\n\t\tExiting Program.\n";
                 break;
             default:
                 cout << "\n\t\tInvalid choice Please try again.\n";
         }
 
-    } while(choice != 6);
+    } while(choice != 7);
 
     return (0);
 }
@@ -74,4 +79,17 @@ int validateInt(string prompt, int high, int low) {
     }
 
     return num;
+}
+template <typename typNode>
+void sortItOut()
+{
+    int ascending;
+
+    cout << "\n\t\tChoose sorting order (Alcohol %):\n";
+    cout << "\t\t1. Ascending\n";
+    cout << "\t\t2. Descending\n";
+    cout << "\t\tEnter your choice: ";
+    cin >> ascending;
+
+    LinkedList<typNode>.sortList(ascending);
 }

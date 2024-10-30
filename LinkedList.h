@@ -40,7 +40,8 @@ class LinkedList {
         void setListSize();
 
         //friend function prototypes
-        void sortList();
+        void sortList(int searchParameter, bool orderChoice);
+        void sortByAlcoholPercentage(bool ascending);
         friend ostream& operator<<(ostream& os, const LinkedList& linkedlist);
 };
 

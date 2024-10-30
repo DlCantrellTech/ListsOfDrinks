@@ -88,13 +88,13 @@ void LinkedList<typNode>::removeFrom()
 }
 
 template <typename typNode>
-typNode LinkedList<typNode>::getFrom()
+void LinkedList<typNode>::getFrom()
 {
     if (head == NULL)
     {
         cout << "\n\n\t\tError: List is empty\n\n";
     }
-    return head->value;
+    // print functionality
 }
 
 //getter
@@ -113,15 +113,95 @@ void LinkedList<typNode>::setListSize()
 
 //friend function prototypes
 template <typename typNode>
-void LinkedList<typNode>::sortList()
+void LinkedList<typNode>::sortList(int ascending)
 {
+    // Find the last node
+    typename ListNode<typNode>::NodeCell* high = head;
+    while (high && high->next != nullptr) {
+        high = high->next;
+    }
+    switch(ascending)
+    {
+        case 1: // ascending order
+            quickSort(head, high);
+            break;
+        case 2: // descending order
+            quickSortDesc(head, high);
+            break;
+        default:
+            cout << "\n\t\tInvalid choice!" << endl;
+            sortItOut();
+            return;
+    }
 
+}
+
+template <typename typNode>
+void quickSort(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high)
+{
+    if (high != nullptr && low != high && low != high->next) 
+    {
+        typename ListNode<typNode>::NodeCell* p = partition(low, high); // Partition the list
+        quickSort(low, p->prev);                                     // Recursively sort before partition
+        quickSort(p->next, high);                                    // Recursively sort after partition
+    }
+}
+
+template <typename typNode>
+void quickSortDesc(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high, ) {
+    if (high != nullptr && low != high && low != high->next) 
+    {
+        typename ListNode<typNode>::NodeCell* p = partitionDesc(low, high); // Partition the list
+        quickSortDesc(low, p->prev);                                     // Recursively sort before partition
+        quickSortDesc(p->next, high);                                    // Recursively sort after partition
+    }
+}
+
+template <typename typNode>
+typename ListNode<typNode>::NodeCell* partition(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high)
+{
+    // Using the last element as the pivot
+    typNode pivot = high->value;
+    typename ListNode<typNode>::NodeCell* i = low->prev;                // Pointer for the greater element
+
+    for (typename ListNode<typNode>::NodeCell* j = low; j != high; j = j->next) 
+    {
+        if (*j->value < pivot) {                                        // Use overloaded < operator
+            i = (i == nullptr) ? low : i->next;                         // Move pointer for the greater element
+            swap(i->value, j->value);                                   // Swap values
+        }
+    }
+    i = (i == nullptr) ? low : i->next;                                 // Move to the next element
+    swap(i->value, high->value);                                        // Swap the pivot
+
+    return (i);                                                         // Return the partitioning index
+}
+
+template <typename typNode>
+typename ListNode<typNode>::NodeCell* partitionDesc(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high) {
+    // Using the last element as the pivot
+    typNode pivot = high->value;
+    typename ListNode<typNode>::NodeCell* i = low->prev;                // Pointer for the greater element
+
+    for (typename ListNode<typNode>::NodeCell* j = low; j != high; j = j->next) 
+    {
+                                                                        // Change the comparison for descending order
+        if (*j->value > pivot) {                                        // Use overloaded > operator
+            i = (i == nullptr) ? low : i->next;                         // Move pointer for the greater element
+            swap(i->value, j->value);                                   // Swap values
+        }
+    }
+    i = (i == nullptr) ? low : i->next;                                 // Move to the next element
+    swap(i->value, high->value);                                        // Swap the pivot
+
+    return (i);                                                         // Return the partitioning index
 }
 
 template <typename typNode>
 ostream& operator<<(ostream& os, const LinkedList<typNode>& LinkedList)
 {
     os << "\n********************\n"
+
        << "\n********************\n" << endl;
     return os;
-}
+};
