@@ -216,7 +216,13 @@ void LinkedList<typNode>::readIn()
     int choice, numDrinks = 0;
     string fileName, inputCounter;
     
-    choice = validateInt("\n\nWhich file would you like to read from?\n\n\t1. Working Library\n\t2. Other\n\t3. Back\n", 3, 0);
+    cout << "\n\nWhich file would you like to read from?\n\n\t1. Working Library\n\t2. Other\n\t3. Back\n";
+    
+    while(!(cin >> choice) || (choice > 3 || choice <= 0)) {
+        cout << "Error Try Again:\n" << "\n\nWhich file would you like to read from?\n\n\t1. Working Library\n\t2. Other\n\t3. Back\n";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
 
     switch(choice)
     {
@@ -256,8 +262,6 @@ void LinkedList<typNode>::readIn()
     
     input.clear();
     input.seekg(0);
-
-    this->numDrinks = numDrinks;    // set numDrinks to the equivalent class variable
 
     for (int i = 0; i < numDrinks; i++)
     {

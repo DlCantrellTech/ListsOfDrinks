@@ -1,3 +1,8 @@
+/*  Title: ListNode.h
+ *  Author: Brody Mensonides
+ *  Date: 10/30/24
+ *  Purpose: Declares ListNode Class 
+ */
 #ifndef LISTNODE_H
 #define LISTNODE_H
 
@@ -7,7 +12,6 @@ template <typename typNode>
 
 class ListNode
 {
-    
     private:
         struct NodeCell
         {
@@ -15,35 +19,38 @@ class ListNode
             NodeCell *prev;
             NodeCell *next;
 
-            ListNode (typNode *P,typNode *N): prev(P),next(N)
+            NodeCell (typNode val, typNode *P = nullptr, typNode *N = nullptr): value(val), prev(P),next(N)
             {
                 if(P) prev->next = this;
                 if(N) next->prev = this;
             } 
         };
         
+        NodeCell *current; //current node pointer
+        int size;
+    
     public:
 
-    listNode(lNode);
+    //Constructor and Deconstrtuctor 
+    ListNode();
+    ~ListNode();
 
-    ~listNode();
+    //Iterators
+    typNode nextNode();
+    typNode prevNode();
+    
+    //Deletes the current node
+    void deleteCurrent()
 
-    typNode *current;
-    int size;
-    void out(bool);
-    void setCurrent(lNode);
-    void setPrev(typNode*);
-    void setNext(typNode*);
-    bool findCurrent(lNode);
-    void deleteCurrent(lNode, bool)
-
+    //Getters
     typNode getPrev();
     typNode getNext();
     typNode getCurrent();
 
-    typNode setPrev();
-    typNode setNext();
-    typNode setCurrent();
+    //Setters
+    void setCurrent(NodeCell *node);
+    void setPrev(NodeCell *node);
+    void setNext(NodeCell *node);
 
 }; 
 #endif //LISTNODE_H
