@@ -11,8 +11,10 @@ template <typename typNode>
 
 int main () {
     int choice;
-    readIn();
-    sortItOut();
+
+    readIn();           // access library data
+    sortItOut();        // sort data
+
     do {
         choice = displayMenuGetChoice();
 
