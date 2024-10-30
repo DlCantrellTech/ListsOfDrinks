@@ -28,22 +28,22 @@ class ListNode
 
     ~listNode();
 
-    nodeList *current;
+    typNode *current;
     int size;
     void out(bool);
     void setCurrent(lNode);
-    void setPrev(nodeList*);
-    void setNext(nodeList*);
+    void setPrev(typNode*);
+    void setNext(typNode*);
     bool findCurrent(lNode);
     void deleteCurrent(lNode, bool)
 
-    nodeList getPrev();
-    nodeList getNext();
-    nodeList getCurrent();
+    typNode getPrev();
+    typNode getNext();
+    typNode getCurrent();
 
-    nodeList setPrev();
-    nodeList setNext();
-    nodeList setCurrent();
+    typNode setPrev();
+    typNode setNext();
+    typNode setCurrent();
 
 }; 
 #endif //LISTNODE_H
