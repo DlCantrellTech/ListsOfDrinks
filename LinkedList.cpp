@@ -207,3 +207,89 @@ ostream& operator<<(ostream& os, const LinkedList<typNode>& LinkedList)
        << "\n********************\n" << endl;
     return os;
 };
+
+template <typename typNode>
+void LinkedList<typNode>::readIn()
+{
+    ifstream input;                 // cin file
+
+    int choice, numDrinks = 0;
+    string fileName, inputCounter;
+    
+    choice = validateInt("\n\nWhich file would you like to read from?\n\n\t1. Working Library\n\t2. Other\n\t3. Back\n", 3, 0);
+
+    switch(choice)
+    {
+        case 1:
+            fileName = "WORKING_LIBRARY.txt";
+            break;
+        case 2:
+            fileName.clear();
+            cout << "\n\t\tEnter name of file or hit Enter key to exit: " << endl;
+            cin.ignore();
+            getline(cin, fileName);
+            if(fileName.empty())
+            {
+                return;
+            }
+            break;
+        case 3:
+            break;
+        default:
+            cout << "\nInvalid selection!";
+            break;
+    }
+
+    input.open(fileName);
+
+    if (input.fail())               // fail case
+    {
+        cout << "\n\t\tFailed to open input file. Check for " << fileName << " and try again." << endl;
+        return;
+    }
+
+    // count numDrinks
+    while (getline(input, inputCounter, '\n'))
+    {
+        numDrinks++;
+    }
+    
+    input.clear();
+    input.seekg(0);
+
+    this->numDrinks = numDrinks;    // set numDrinks to the equivalent class variable
+
+    for (int i = 0; i < numDrinks; i++)
+    {
+        string name, pairing, glassware, instructions;
+        string* ingredients;
+        int alchololPercentage, numIngredients;
+
+        // obtain values for parameters from input file
+        getline(input, name, '*');
+
+        input >> alchololPercentage;
+        input.ignore();               // ignore *
+
+        getline(input, pairing, '*');
+
+        input >> numIngredients;
+        input.ignore();               // ingore *
+        ingredients = new string[numIngredients];
+        for(int j = 0; j < numIngredients; j++)
+        {
+        getline(input, ingredients[j], '*');
+        }
+
+        getline(input, glassware, '*');
+
+        getline(input, instructions, '*');
+
+        addTo(new Drink(name, alchololPercentage, pairing, new Recipe(numIngredients, ingredients, glassware, instructions)));
+        input.ignore();
+    }
+
+    cout << "\nSuccessfully read input file: " << fileName << endl;
+
+    input.close();
+}

@@ -8,7 +8,7 @@
 #define LINKEDLIST_H
 
 #include <iostream>
-#include <ListNode.h>
+#include "ListNode.h"
 
 using namespace std;
 
@@ -16,6 +16,7 @@ template <typename typNode>
 
 class LinkedList {
     private:
+
         typename ListNode<typNode>::NodeCell *head;
         typename ListNode<typNode>::NodeCell *tail;
         int listSize;
@@ -32,6 +33,7 @@ class LinkedList {
         void addTo(typNode value);
         void removeFrom();
         void getFrom();
+        void readIn();
 
         //getter
         int getListSize();
