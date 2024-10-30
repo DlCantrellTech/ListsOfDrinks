@@ -8,6 +8,7 @@ int displayMenuGetChoice();
 int validateInt(string), validateInt(string, int, int);
 template <typename typNode>
 void sortItOut(LinkedList<typNode> listToSort);
+template <typename typNode>
 
 int main () {
     int choice;
