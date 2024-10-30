@@ -148,7 +148,8 @@ void quickSort(typename ListNode<typNode>::NodeCell* low, typename ListNode<typN
 }
 
 template <typename typNode>
-void quickSortDesc(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high, ) {
+void quickSortDesc(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high, ) 
+{
     if (high != nullptr && low != high && low != high->next) 
     {
         typename ListNode<typNode>::NodeCell* p = partitionDesc(low, high); // Partition the list
@@ -178,7 +179,8 @@ typename ListNode<typNode>::NodeCell* partition(typename ListNode<typNode>::Node
 }
 
 template <typename typNode>
-typename ListNode<typNode>::NodeCell* partitionDesc(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high) {
+typename ListNode<typNode>::NodeCell* partitionDesc(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high)
+{
     // Using the last element as the pivot
     typNode pivot = high->value;
     typename ListNode<typNode>::NodeCell* i = low->prev;                // Pointer for the greater element
