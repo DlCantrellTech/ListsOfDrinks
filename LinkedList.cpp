@@ -41,6 +41,59 @@ LinkedList<typNode>::~LinkedList() {
     }
 }
 
+template <typename typNode>
+void LinkedList<typNode>::add()
+{
+    string drinkName, pairing, glassware, instructions;
+    int alcoholPercentage, numIngredients;
+    
+    cout << "\nAdding Drink:\n";
+
+    //gets the drinks infromation from the user
+    cin.ignore();
+    cout << "\t\tEnter Drink Name: ";
+    getline(cin, drinkName);
+
+    cout << "\t\tEnter the alcohol Percentage: ";
+    while(!(cin >> alcoholPercentage)) {
+        cout << "Error Try Again:\n\t\tEnter the alcohol Percentage: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
+    cin.ignore();
+    
+    cout << "\t\tEnter a Pairing: ";
+    getline(cin, pairing);
+
+    cout << "\t\tNumber of Ingredients: ";
+    while(!(cin >> numIngredients)) {
+        cout << "Error Try Again:\n\t\tNumber of Ingredients: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
+    cin.ignore();
+
+    string* ingredients = new string[numIngredients];
+    for (int j = 0; j < numIngredients; j++) {
+        cout << "\t\tIngredient #" << (j + 1) << ": ";
+        getline(cin, ingredients[j]);
+    }
+
+    cout << "\t\tGlassware: ";
+    getline(cin, glassware);
+
+    cout << "\t\tInstructions (type full instructions before hitting enter): ";
+    getline(cin, instructions);
+
+    // Create a new Recipe object
+    Recipe* drinkRecipe = new Recipe(numIngredients, ingredients, glassware, instructions);
+
+    // creates a new Drink object
+    Drink* newDrink = new Drink(drinkName, alcoholPercentage, pairing, drinkRecipe);
+
+    this->addTo(newDrink);
+}
+
 // function prototypes
 template <typename typNode>
 void LinkedList<typNode>::addTo(typNode* value)
@@ -333,7 +386,7 @@ void LinkedList<typNode>::readIn()
 
     input.close();
 }
-/*
+
 template <typename typNode>
 void LinkedList<typNode>::makeNew() 
 {
@@ -352,31 +405,30 @@ void LinkedList<typNode>::makeNew()
     }
 
     // Write drinks to the file using * as delimiter !!!!!!!!!!!!!!!!!!!! change
-    for (int i = 0; i < this->listSize; i++) {
-        output <<  << "*"
-               << drinks[i]->getAlcoholPercentage() << "*"
-               << drinks[i]->getPairing() << "*"
-               << drinks[i]->getRecipe()->getnumIngredients() << "*";
+    for(typename LinkedList<typNode>::Iterator it = this->begin(); it != this->end();) {
+        typNode& drink = *it;
 
-        ingredients = drinks[i]->getRecipe()->getIngredients();
-        for (int j = 0; j < drinks[i]->getRecipe()->getnumIngredients(); j++) {
-            output << ingredients[j] << (j < drinks[i]->getRecipe()->getnumIngredients() - 1 ? "*" : "");
+        output << drink.getName() << "*"
+               << drink.getAlcoholPercentage() << "*"
+               << drink.getPairing() << "*"
+               << drink.getRecipe()->getNumIngredients() << "*";
+
+        ingredients = drink.getRecipe()->getIngredients();
+        for (int j = 0; j < drink.getRecipe()->getNumIngredients(); j++) {
+            output << ingredients[j] << (j < drink.getRecipe()->getNumIngredients() - 1 ? "*" : "");
         }
 
         output << "*" 
-               << drinks[i]->getRecipe()->getGlassware() << "*" 
-               << drinks[i]->getRecipe()->getInstructions() << "*" << endl;
+               << drink.getRecipe()->getGlassware() << "*" 
+               << drink.getRecipe()->getInstructions() << "*" << endl;
+
+        this->remove(it);
+        it = this->begin();
     }
 
     output.close();
     cout << "\nNew drink library saved to " << fileName << endl;
 
-    //Clean up dynamically allocated ingredients
-    for (int i = 0; i < this->listSize; i++) {
-        delete drinks[i]; 
-    }
-    // clean up the drinks array
-    delete[] drinks;
-}*/
+}
 
 template class LinkedList<Drink>;

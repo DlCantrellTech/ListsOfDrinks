@@ -30,11 +30,12 @@ class LinkedList {
         ~LinkedList();
 
         //function prototypes
+        void add();
         void addTo(typNode* value);
         void removeFrom();
         void getFrom();
         void readIn();
-        //void makeNew();
+        void makeNew();
 
         //getter
         int getListSize();
@@ -68,10 +69,9 @@ class LinkedList {
                 ListNode<typNode> * getNode() {return current;}
         };
 
+        //iterator class functions
         Iterator begin() {return Iterator(head);}
-
         Iterator end() {return Iterator(tail);}
-
         void remove(Iterator);
 };
 
