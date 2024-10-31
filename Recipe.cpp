@@ -12,7 +12,9 @@ Recipe::Recipe()
 Recipe::Recipe(int numIngredients, string* ingredients, string glassware, string instructions)
 {
     this->numIngredients = numIngredients;
-    this->ingredients = ingredients;
+    this->ingredients = new string[numIngredients];
+    for (int i = 0; i < numIngredients; ++i)
+        this->ingredients[i] = ingredients[i]; // Copy ingredients
     this->glassware = glassware;
     this->instructions = instructions;
 }

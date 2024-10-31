@@ -13,21 +13,9 @@ template <typename typNode>
 class ListNode
 {
     private:
-        struct NodeCell
-        {
-            typNode value;
-            NodeCell *prev;
-            NodeCell *next;
-
-            NodeCell (typNode val, typNode *P = nullptr, typNode *N = nullptr): value(val), prev(P),next(N)
-            {
-                if(P) prev->next = this;
-                if(N) next->prev = this;
-            } 
-        };
-        
-        NodeCell *current; //current node pointer
-        int size;
+        typNode* value;
+        ListNode *prev;
+        ListNode *next;
     
     public:
 
@@ -43,9 +31,10 @@ class ListNode
     void deleteCurrent();
 
     //Getters
-    typNode getPrev();
-    typNode getNext();
-    typNode getValue();
+    ListNode<typNode>* getPrev();
+    ListNode<typNode>* getNext();
+    typNode* getValue();
+    ListNode<typNode>* getCurrent();
 
     //Setters
     void setValue(typNode value);
@@ -53,4 +42,5 @@ class ListNode
     void setNext(NodeCell *node);
 
 }; 
+
 #endif //LISTNODE_H
