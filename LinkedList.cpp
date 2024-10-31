@@ -42,7 +42,7 @@ LinkedList<typNode>::~LinkedList() {
 }
 
 template <typename typNode>
-void LinkedList<typNode>::add()
+void LinkedList<typNode>::getFrom()
 {
     string drinkName, pairing, glassware, instructions;
     int alcoholPercentage, numIngredients;
@@ -175,77 +175,18 @@ void LinkedList<typNode>::remove(Iterator it) {
         listSize--; // Decrease list size
 }
 
-template <typename typNode>
-void LinkedList<typNode>::remove(Iterator it) {
-    if(it.getNode() == nullptr) {
-        cout << "\n\n\t\tError: current drink is empty\n\n";
-        return;
-    }
-
-    ListNode<typNode>* nodeToDelete = it.getNode();
-
-     if (nodeToDelete == head) {
-            head = head->getNext();
-            if (head) head->setPrev(nullptr);
-            else tail = nullptr; // List is empty now
-        } else {
-            ListNode<typNode>* prevNode = nodeToDelete->getPrev();
-            ListNode<typNode>* nextNode = nodeToDelete->getNext();
-
-            if (prevNode) prevNode->setNext(nextNode);
-            if (nextNode) nextNode->setPrev(prevNode);
-
-            // Update tail if necessary
-            if (nodeToDelete == tail) {
-                tail = prevNode;
-            }
-        }
-
-        delete nodeToDelete; // Free memory
-        listSize--; // Decrease list size
-}
-
-template <typename typNode>
-typNode LinkedList<typNode>::getFrom()
-{
-    for (int i = 0; i < numDrinks; i++)
-    {
-        string name, pairing, glassware, instructions;
-        string* ingredients;
-        int alchololPercentage, numIngredients;
-        cout << "\n\t\tEnter Drink Name: ";
-        getline(cin, name);
-        cout << "\n\t\tEnter Drink Alcohol Percentage: ";
-        cin >> alchololPercentage;
-        cout << "\n\t\tEnter Drink Pairing: ";
-        getline(cin, pairing);
-        cout << "\n\t\tEnter Drink Glassware: ";
-        getline(cin, glassware);
-        cout << "\n\t\tEnter Number of Ingredients ";
-        cin >> numIngredients;
-
-        ingredients = new string[numIngredients];
-        for(int j = 0; j < numIngredients; j++)
-        {
-            cout << "\n\t\tEnter Ingredient #" << j + 1 << endl;
-            getline(cin, ingredients[j]);
-        }
-
-        cout << "\n\t\tEnter Instructions: ";
-        getline(cin, instructions);
-        Recipe drinkRecipe = new Recipe.Recipe(numIngredients, ingredients, glassware, instructions);
-        Drink value = new Drink.Drink(name, alchololPercentage, pairing, drinkRecipe)
-
-        return (value);
-    }
-
-}
 
 //getter
 template <typename typNode>
-int LinkedList<typNode>::getListSize()
+ListNode<typNode>* LinkedList<typNode>::getHead() const
 {
-    return listSize;
+    return this->head;
+}
+
+template <typename typNode>
+int LinkedList<typNode>::getListSize() const
+{
+    return this->listSize;
 }
 
 //setter

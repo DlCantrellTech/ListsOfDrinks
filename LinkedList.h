@@ -38,6 +38,7 @@ class LinkedList {
         void makeNew();
 
         //getter
+        ListNode<typNode>* getHead();
         int getListSize();
 
         //setter

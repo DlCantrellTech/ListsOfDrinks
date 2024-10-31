@@ -22,16 +22,15 @@ int main () {
 
     do {
         // display current Drink and num drinks in library
-        if (drinksList->head != NULL)
+        if (drinksList.getHead() != NULL)
         {
             cout << "\n" << drinksList << endl;
             cout << "\n\tCurrent Number of Drinks in Library: " << drinksList.getListSize() << endl;
         }
         else    // grab or start new library if list is empty
         {
-            cout << "\n\t\tLibrary is Currently Empty!\n\n"
-            dinkslist.getFrom();
-            drinksList.addTo(this->value);
+            cout << "\n\t\tLibrary is Currently Empty!\n\n";
+            drinksList.getFrom();
         }
         
         // display main menu
@@ -57,7 +56,6 @@ int main () {
                 break;
             case 3: //add drink
                 drinksList.getFrom();
-                dinksList.addTo(value);
                 break;
             case 4: //remove drink
                 drinksList.remove(it);
