@@ -6,6 +6,8 @@
 
 #include "LinkedList.h"
 #include "ListNode.h"
+#include "Drink.h"
+#include "Recipe.h"
 #include <list>
 
 // default constructor
@@ -88,13 +90,39 @@ void LinkedList<typNode>::removeFrom()
 }
 
 template <typename typNode>
-void LinkedList<typNode>::getFrom()
+typNode LinkedList<typNode>::getFrom()
 {
-    if (head == NULL)
+    for (int i = 0; i < numDrinks; i++)
     {
-        cout << "\n\n\t\tError: List is empty\n\n";
+        string name, pairing, glassware, instructions;
+        string* ingredients;
+        int alchololPercentage, numIngredients;
+        cout << "\n\t\tEnter Drink Name: ";
+        getline(cin, name);
+        cout << "\n\t\tEnter Drink Alcohol Percentage: ";
+        cin >> alchololPercentage;
+        cout << "\n\t\tEnter Drink Pairing: ";
+        getline(cin, pairing);
+        cout << "\n\t\tEnter Drink Glassware: ";
+        getline(cin, glassware);
+        cout << "\n\t\tEnter Number of Ingredients ";
+        cin >> numIngredients;
+
+        ingredients = new string[numIngredients];
+        for(int j = 0; j < numIngredients; j++)
+        {
+            cout << "\n\t\tEnter Ingredient #" << j + 1 << endl;
+            getline(cin, ingredients[j]);
+        }
+
+        cout << "\n\t\tEnter Instructions: ";
+        getline(cin, instructions);
+        Recipe drinkRecipe = new Recipe.Recipe(numIngredients, ingredients, glassware, instructions);
+        Drink value = new Drink.Drink(name, alchololPercentage, pairing, drinkRecipe)
+
+        return (value);
     }
-    // print functionality
+
 }
 
 //getter
@@ -203,7 +231,7 @@ template <typename typNode>
 ostream& operator<<(ostream& os, const LinkedList<typNode>& LinkedList)
 {
     os << "\n********************\n"
-
+       <<  this->value
        << "\n********************\n" << endl;
     return os;
 };

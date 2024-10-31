@@ -14,21 +14,21 @@ int main () {
     int choice;
 
     LinkedList<typNode> drinksList;
-    drinksList.readIn();                    // access library data
-    sortItOut(listToSort);                            // sort data
+    drinksList.readIn();                              // access library data
+    sortItOut(drinksList);                            // sort data
 
     do {
         // display current Drink and num drinks in library
         if (drinksList->head != NULL)
         {
-            drinksList.getFrom();
+            cout << "\n" << drinksList << endl;
             cout << "\n\tCurrent Number of Drinks in Library: " << drinksList.getListSize() << endl;
         }
         else    // grab or start new library if list is empty
         {
             cout << "\n\t\tLibrary is Currently Empty!\n\n"
-            // !!!!!!!!! add drink
-            drinksList.addTo(value);
+            dinkslist.getFrom();
+            drinksList.addTo(this->value);
         }
         
         // display main menu
@@ -36,13 +36,13 @@ int main () {
       
         switch(choice) {
             case 1: //next drink
-                // ListNode iterator use
+                this.nextNode();
                 break;
             case 2: //previous drink
-                // ListNode iterator use
+                this.prevNode();
                 break;
             case 3: //add drink
-                // !!!!!!!!! add drink
+                drinksList.getFrom();
                 dinksList.addTo(value);
                 break;
             case 4: //save file

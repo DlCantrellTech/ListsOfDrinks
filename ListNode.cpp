@@ -2,7 +2,12 @@
 
 //Constructor 
 template <typename typNode>
-ListNode<typNode>::ListNode():current(nullptr),size(0){}
+ListNode<typNode>::ListNode(typNode value, NodeCell *prev, NodeCell *next)
+{
+    this->value = value;
+    this->prev = prev;
+    this->next = next;
+}
 
 //Deconstructor
 template <typename typNode>

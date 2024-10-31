@@ -32,7 +32,7 @@ class ListNode
     public:
 
     //Constructor and Deconstrtuctor 
-    ListNode();
+    ListNode(typNode value, NodeCell *prev, NodeCell *next);
     ~ListNode();
 
     //Iterators
@@ -40,15 +40,15 @@ class ListNode
     typNode prevNode();
     
     //Deletes the current node
-    void deleteCurrent()
+    void deleteCurrent();
 
     //Getters
     typNode getPrev();
     typNode getNext();
-    typNode getCurrent();
+    typNode getValue();
 
     //Setters
-    void setCurrent(NodeCell *node);
+    void setValue(typNode value);
     void setPrev(NodeCell *node);
     void setNext(NodeCell *node);
 
