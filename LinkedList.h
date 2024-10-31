@@ -9,32 +9,32 @@
 
 #include <iostream>
 #include "ListNode.h"
+#include "Drink.h"
+#include "Recipe.h"
 
 using namespace std;
 
 template <typename typNode>
-
 class LinkedList {
     private:
-
-        typename ListNode<typNode>::NodeCell *head;
-        typename ListNode<typNode>::NodeCell *tail;
+        ListNode<typNode> *head;
+        ListNode<typNode> *tail;
         int listSize;
 
     public:
         //constructors
         LinkedList();
-        LinkedList(typename ListNode<typNode>::NodeCell*, typename ListNode<typNode>::NodeCell*, int);
+        LinkedList(ListNode<typNode>*, ListNode<typNode>*, int);
 
         //destructor
         ~LinkedList();
 
         //function prototypes
-        void addTo(typNode value);
+        void addTo(typNode* value);
         void removeFrom();
         void getFrom();
         void readIn();
-        void makeNew(); 
+        //void makeNew();
 
         //getter
         int getListSize();
@@ -43,8 +43,36 @@ class LinkedList {
         void setListSize();
 
         //friend function prototypes
-        void sortList(int ascending);
-        friend ostream& operator<<(ostream& os, const LinkedList& linkedlist);
+        template <typename T>
+        friend ostream& operator<<(ostream&, const LinkedList<T>&);
+        template <typename T>
+        friend void sortList(LinkedList<T>&, int);
+
+        class Iterator {
+            private:
+                ListNode<typNode>* current;
+
+            public:
+                Iterator(ListNode<typNode>* node) {current = node;}
+
+                typNode& operator*() {return *current->getValue();}
+
+                Iterator& operator++() {if(current) {current = current->getNext();} return *this;}
+
+                Iterator& operator--() {if(current) {current = current->getPrev();} return *this;}
+
+                bool operator==(const Iterator& other) {return current == other.current;}
+
+                bool operator!=(const Iterator& other) {return current != other.current;}
+
+                ListNode<typNode> * getNode() {return current;}
+        };
+
+        Iterator begin() {return Iterator(head);}
+
+        Iterator end() {return Iterator(tail);}
+
+        void remove(Iterator);
 };
 
 #endif

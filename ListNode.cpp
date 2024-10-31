@@ -1,20 +1,24 @@
 #include "ListNode.h"
+#include "Drink.h"
+#include "Recipe.h"
 
 //Constructor 
 template <typename typNode>
-ListNode<typNode>::ListNode():current(nullptr),size(0){}
+ListNode<typNode>::ListNode(typNode* value) {
+    this->value = value;
+    this->next = nullptr;
+    this->prev = nullptr;
+}
 
 //Deconstructor
 template <typename typNode>
 ListNode<typNode>::~ListNode()
 {
-    while (current)
-    {
-        deleteCurrent();
-    }
+    delete value;
 }
 
 //Iterators
+/*
 template <typename typNode>
 typNode ListNode<typNode>::nextNode()
 {
@@ -25,7 +29,7 @@ typNode ListNode<typNode>::nextNode()
     }
     else
     {
-        return typNode; //Returns the default value if no next node
+        //return typNode; //Returns the default value if no next node
     }
 }
 
@@ -39,6 +43,33 @@ typNode ListNode<typNode>::prevNode()
     }
     else
     {
-        return typNode(); //Returns default value if no previous node
+        //return typNode(); //Returns default value if no previous node
     }
+}*/
+
+template <typename typNode>
+ListNode<typNode>* ListNode<typNode>::getNext() {
+    return next;
 }
+
+template <typename typNode>
+ListNode<typNode>* ListNode<typNode>::getPrev() {
+    return prev;
+}
+
+//template <typename typNode>
+//ListNode<typNode>& ListNode<typNode>::getValue() {
+//    return *value;
+//}
+
+template <typename typNode>
+void ListNode<typNode>::setNext(ListNode<typNode>* node) {
+    next = node;
+}
+
+template <typename typNode>
+void ListNode<typNode>::setPrev(ListNode<typNode>* node) {
+    prev = node;
+}
+
+template class ListNode<Drink>;

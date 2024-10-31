@@ -6,20 +6,25 @@
 
 #include "LinkedList.h"
 #include "ListNode.h"
-#include <list>
+#include "Drink.h"
+#include "Recipe.h"
+#include <fstream>
+#include <iostream>
+
+using namespace std;
 
 // default constructor
 template <typename typNode>
 LinkedList<typNode>::LinkedList()
 {
-    head = NULL;
-    tail = NULL;
+    head = nullptr;
+    tail = nullptr;
     listSize = 0;
 }
 
 // constructor
 template <typename typNode>
-LinkedList<typNode>::LinkedList(typename ListNode<typNode>::NodeCell *head,typename ListNode<typNode>::NodeCell *tail, int listSize)
+LinkedList<typNode>::LinkedList(ListNode<typNode> *head, ListNode<typNode> *tail, int listSize)
 {
     this->head = head;
     this->tail = tail;
@@ -29,29 +34,30 @@ LinkedList<typNode>::LinkedList(typename ListNode<typNode>::NodeCell *head,typen
 // destructor
 template <typename typNode>
 LinkedList<typNode>::~LinkedList() {
-    while (head != NULL) {
-        LinkedList temp = head;
-        head = head->next;
+    while (head != nullptr) {
+        ListNode<typNode>* temp = head;
+        head = head->getNext();
         delete temp;
     }
 }
 
 // function prototypes
 template <typename typNode>
-void LinkedList<typNode>::addTo(typNode value)
+void LinkedList<typNode>::addTo(typNode* value)
 {
     // make new node
-    typename listNode<typNode>::NodeCell *newNode = new typename ListNode<typNode>::NodeCell(value);
+    //typename listNode<typNode>::NodeCell *newNode = new typename ListNode<typNode>::NodeCell(value);
+    ListNode<typNode> *newNode = new ListNode<typNode>(value);
 
-    if (head == NULL)                       // if list is empty, set current node to head/tail
+    if (head == nullptr)                       // if list is empty, set current node to head/tail
     {
-        head == newNode;
-        tail == newNode;
+        head = newNode;
+        tail = newNode;
     }
     else                                    // if not, move pointers around to add to end of list
     {
-        tail->next = newNode;
-        newNode->prev = tail;
+        tail->setNext(newNode);
+        newNode->setPrev(tail);
         tail = newNode;
     }
 
@@ -62,25 +68,24 @@ template <typename typNode>
 void LinkedList<typNode>::removeFrom()
 {
     // check if list is empty
-    if (head == NULL)
+    if (head == nullptr)
     {
         cout << "\n\t\tError! List is already empty!\n";
         return;
     }
 
     // make a temporary pointer to the old head
-    typename ListNode<typNode>::NodeCell *temp = head;
-
-    head = head->next;                      // move the head of the list
+    ListNode<typNode> *temp = head;
+    head = head->getNext();                      // move the head of the list
     
     // if new head has content, update prev point. Else, set new initialize tail pointer
-    if (head != Null)
+    if (head != nullptr)
     {
-        head->prev = NULL;
+        head->setPrev(nullptr);
     }
     else
     {
-        tail = NULL;
+        tail = nullptr;
     }
 
     delete temp;                            // clean up
@@ -88,9 +93,39 @@ void LinkedList<typNode>::removeFrom()
 }
 
 template <typename typNode>
+void LinkedList<typNode>::remove(Iterator it) {
+    if(it.getNode() == nullptr) {
+        cout << "\n\n\t\tError: current drink is empty\n\n";
+        return;
+    }
+
+    ListNode<typNode>* nodeToDelete = it.getNode();
+
+     if (nodeToDelete == head) {
+            head = head->getNext();
+            if (head) head->setPrev(nullptr);
+            else tail = nullptr; // List is empty now
+        } else {
+            ListNode<typNode>* prevNode = nodeToDelete->getPrev();
+            ListNode<typNode>* nextNode = nodeToDelete->getNext();
+
+            if (prevNode) prevNode->setNext(nextNode);
+            if (nextNode) nextNode->setPrev(prevNode);
+
+            // Update tail if necessary
+            if (nodeToDelete == tail) {
+                tail = prevNode;
+            }
+        }
+
+        delete nodeToDelete; // Free memory
+        listSize--; // Decrease list size
+}
+
+template <typename typNode>
 void LinkedList<typNode>::getFrom()
 {
-    if (head == NULL)
+    if (head == nullptr)
     {
         cout << "\n\n\t\tError: List is empty\n\n";
     }
@@ -113,24 +148,19 @@ void LinkedList<typNode>::setListSize()
 
 //friend function prototypes
 template <typename typNode>
-void LinkedList<typNode>::sortList(int ascending)
+void sortList(LinkedList<typNode>& list,int ascending)
 {
-    // Find the last node
-    typename ListNode<typNode>::NodeCell* high = head;
-    while (high && high->next != nullptr) {
-        high = high->next;
-    }
     switch(ascending)
     {
         case 1: // ascending order
-            quickSort(head, high);
+            quickSort(list.head, list.tail);
             break;
         case 2: // descending order
-            quickSortDesc(head, high);
+            quickSortDesc(list.head, list.tail);
             break;
         default:
             cout << "\n\t\tInvalid choice!" << endl;
-            sortItOut();
+            //sortItOut();
             return;
     }
 
@@ -148,7 +178,7 @@ void quickSort(typename ListNode<typNode>::NodeCell* low, typename ListNode<typN
 }
 
 template <typename typNode>
-void quickSortDesc(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high, ) 
+void quickSortDesc(typename ListNode<typNode>::NodeCell* low, typename ListNode<typNode>::NodeCell* high) 
 {
     if (high != nullptr && low != high && low != high->next) 
     {
@@ -199,8 +229,8 @@ typename ListNode<typNode>::NodeCell* partitionDesc(typename ListNode<typNode>::
     return (i);                                                         // Return the partitioning index
 }
 
-template <typename typNode>
-ostream& operator<<(ostream& os, const LinkedList<typNode>& LinkedList)
+template <typename T>
+ostream& operator<<(ostream& os, const LinkedList<T>& LinkedList)
 {
     os << "\n********************\n"
 
@@ -266,20 +296,20 @@ void LinkedList<typNode>::readIn()
     for (int i = 0; i < numDrinks; i++)
     {
         string name, pairing, glassware, instructions;
-        string* ingredients;
-        int alchololPercentage, numIngredients;
+        int alcoholPercentage, numIngredients;
 
         // obtain values for parameters from input file
         getline(input, name, '*');
 
-        input >> alchololPercentage;
+        input >> alcoholPercentage;
         input.ignore();               // ignore *
 
         getline(input, pairing, '*');
 
         input >> numIngredients;
         input.ignore();               // ingore *
-        ingredients = new string[numIngredients];
+
+        string* ingredients = new string[numIngredients];
         for(int j = 0; j < numIngredients; j++)
         {
         getline(input, ingredients[j], '*');
@@ -289,15 +319,21 @@ void LinkedList<typNode>::readIn()
 
         getline(input, instructions, '*');
 
-        addTo(new Drink(name, alchololPercentage, pairing, new Recipe(numIngredients, ingredients, glassware, instructions)));
+        Recipe* recipe = new Recipe(numIngredients, ingredients, glassware, instructions);
+        Drink* newDrink = new Drink(name, alcoholPercentage, pairing, recipe);
+        
+        addTo(newDrink);
+        //addTo(Drink(name, alcoholPercentage, pairing, new Recipe(numIngredients, ingredients, glassware, instructions)));
         input.ignore();
+
+        delete[] ingredients;
     }
 
     cout << "\nSuccessfully read input file: " << fileName << endl;
 
     input.close();
 }
-
+/*
 template <typename typNode>
 void LinkedList<typNode>::makeNew() 
 {
@@ -341,4 +377,6 @@ void LinkedList<typNode>::makeNew()
     }
     // clean up the drinks array
     delete[] drinks;
-}
+}*/
+
+template class LinkedList<Drink>;
