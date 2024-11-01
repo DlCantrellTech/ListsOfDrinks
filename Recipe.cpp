@@ -13,8 +13,9 @@ Recipe::Recipe(int numIngredients, string* ingredients, string glassware, string
 {
     this->numIngredients = numIngredients;
     this->ingredients = new string[numIngredients];
-    for (int i = 0; i < numIngredients; ++i)
+    for (int i = 0; i < numIngredients; ++i) {
         this->ingredients[i] = ingredients[i]; // Copy ingredients
+    }
     this->glassware = glassware;
     this->instructions = instructions;
 }
