@@ -1,7 +1,7 @@
 /*  Tilte: ListNode.h
  *  Author: Dalton Cantrell
  *  Date: 10/23/24
- *  Purpose: Declares LinkedList class
+ *  Purpose: Declares LinkedList class and defines its functions
  */
 
 #ifndef LINKEDLIST_H
@@ -114,6 +114,7 @@ LinkedList<typNode>::~LinkedList() {
     }
 }
 
+// function prototypes
 template <typename typNode>
 void LinkedList<typNode>::getFrom()
 {
@@ -146,6 +147,7 @@ void LinkedList<typNode>::getFrom()
     }
     cin.ignore();
 
+    // get ingredients list from user via array
     string* ingredients = new string[numIngredients];
     for (int j = 0; j < numIngredients; j++) {
         cout << "\t\tIngredient #" << (j + 1) << ": ";
@@ -158,24 +160,21 @@ void LinkedList<typNode>::getFrom()
     cout << "\t\tInstructions (type full instructions before hitting enter): ";
     getline(cin, instructions);
 
-    // Create a new Recipe object
+    // Create a new Recipe object and populates it
     Recipe* drinkRecipe = new Recipe(numIngredients, ingredients, glassware, instructions);
 
-    // creates a new Drink object
+    // creates a new Drink object and populates it
     Drink* newDrink = new Drink(drinkName, alcoholPercentage, pairing, drinkRecipe);
-
     this->addTo(newDrink);
 }
 
-// function prototypes
 template <typename typNode>
 void LinkedList<typNode>::addTo(typNode* value)
 {
     // make new node
-    //typename listNode<typNode>::NodeCell *newNode = new typename ListNode<typNode>::NodeCell(value);
     ListNode<typNode> *newNode = new ListNode<typNode>(value);
 
-    if (head == nullptr)                       // if list is empty, set current node to head/tail
+    if (head == nullptr)                    // if list is empty, set current node to head/tail
     {
         head = newNode;
         tail = newNode;
@@ -186,7 +185,6 @@ void LinkedList<typNode>::addTo(typNode* value)
         newNode->setPrev(tail);
         tail = newNode;
     }
-
     listSize ++;                            // add to list size
 }
 
@@ -216,10 +214,11 @@ void LinkedList<typNode>::remove(Iterator it) {
             }
         }
 
-        delete nodeToDelete; // Free memory
-        listSize--; // Decrease list size
+        delete nodeToDelete;    // Free memory
+        listSize--;             // Decrease list size
 }
 
+//getter
 template <typename typNode>
 int LinkedList<typNode>::getListSize()
 {
@@ -329,7 +328,6 @@ void LinkedList<typNode>::readIn()
         Drink* newDrink = new Drink(name, alcoholPercentage, pairing, recipe);
         
         addTo(newDrink);
-        //addTo(Drink(name, alcoholPercentage, pairing, new Recipe(numIngredients, ingredients, glassware, instructions)));
         input.ignore();
 
         delete[] ingredients;
@@ -357,7 +355,7 @@ void LinkedList<typNode>::makeNew()
         return;
     }
 
-    // Write drinks to the file using * as delimiter !!!!!!!!!!!!!!!!!!!! change
+    // Write drinks to the file using * as delimiter
     for(typename LinkedList<typNode>::Iterator it = this->begin(); it != this->end();) {
         typNode& drink = *it;
 

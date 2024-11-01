@@ -20,53 +20,56 @@ int main () {
 
     do {
         // display current Drink and num drinks in library
-        if (drinksList.begin() != nullptr)
-        {
-            cout << "\n" << drinksList << endl;
-            cout << "\n\tCurrent Number of Drinks in Library: " << drinksList.getListSize() << endl;
-        }
-        else    // grab or start new library if list is empty
-        {
-            cout << "\n\t\tLibrary is Currently Empty!\n\n";
-            drinksList.getFrom();
-        }
+        cout << "------------------------------------------------------------------------------------------------------------------"
+             << "\n\tCurrent Drink:\n\n" << *it 
+             << "------------------------------------------------------------------------------------------------------------------"    
+             << "\n\n\tCurrent Number of Drinks in Library: " << drinksList.getListSize() << endl;
         
-        // display main menu
-
-        cout << "\nCurrent Drink:\n" << *it << endl;
-
-        choice = displayMenuGetChoice();
+        choice = displayMenuGetChoice();               // display main menu
 
         switch(choice) {
-            case 1: //next drink
-                // ListNode iterator use
+            case 1: //print current library
+                if (drinksList.begin() != nullptr)
+                {
+                    cout << "\n" << drinksList << endl;
+                }
+                else    // grab or start new library if list is empty
+                {
+                    cout << "\n\t\tLibrary is Currently Empty!\n\n";
+                    drinksList.getFrom();
+                }
+                break;
+            case 2: //next drink
                 if (it == drinksList.end())
                     it = drinksList.begin();
                 else
                     ++it;
                 break;
-            case 2: //previous drink
-                // ListNode iterator use
+            case 3: //previous drink
                 if(it == drinksList.begin())
                     it = drinksList.end();
                 else
                     --it;
                 break;
-            case 3: //add drink
+            case 4: //add drink
                 drinksList.getFrom();
+                sortItOut(drinksList);
                 break;
-            case 4: //remove drink
+            case 5: //remove drink
                 drinksList.remove(it);
                 it = drinksList.begin();
                 break;
-            case 5: //change file
+            case 6: //save file
                 drinksList.makeNew();
+                break;
+            case 7: //change library
                 drinksList.readIn();
+                sortItOut(drinksList);   
                 it = drinksList.begin();
                 break;
-            case 6: //exit program
+            case 8: //exit program
                 cout << "\n\t\tExiting Program.\n";
-                break;
+                return(0);
             default:
                 cout << "\n\t\tInvalid choice Please try again.\n";
         }
@@ -79,7 +82,7 @@ int main () {
 //prints main menu
 int displayMenuGetChoice() {
 
-    return validateInt("\n--------------------------------------------\n\t\tDRINK LIBRARY\n--------------------------------------------\n\t1 - Next Drink\n\t2 - Previous Drink\n\t3 - Add a Drink\n\t4 - Remove Current Drink\n\t5 - Save and Change Library File\n\t6 - End the Program\n\nCHOICE: ", 6, 0);
+    return validateInt("\n--------------------------------------------\n\t\tDRINK LIBRARY\n--------------------------------------------\n\t1 - Print Current Library\n\t2 - Next Drink\n\t3 - Previous Drink\n\t4 - Add a Drink\n\t5 - Remove Current Drink\n\t6 - Save New Library File\n\t7 - Change Library\n\t8 - End the Program\n\nCHOICE: ", 8, 0);
 
 }
 
