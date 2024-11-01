@@ -57,7 +57,7 @@ class LinkedList {
         int getListSize();
 
         //setter
-        void setListSize();
+        void setListSize(LinkedList<typNode>);
 
         class Iterator {
             private:
@@ -226,7 +226,7 @@ int LinkedList<typNode>::getListSize()
 
 //setter
 template <typename typNode>
-void LinkedList<typNode>::setListSize()
+void LinkedList<typNode>::setListSize(LinkedList<typNode> listSize)
 {
     this->listSize = listSize;
 }
