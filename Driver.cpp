@@ -66,6 +66,7 @@ int main () {
                 drinksList.readIn();
                 sortItOut(drinksList);   
                 it = drinksList.begin();
+                //sortItOut(drinksList);
                 break;
             case 8: //exit program
                 cout << "\n\t\tExiting Program.\n";
