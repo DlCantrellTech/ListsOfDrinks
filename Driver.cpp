@@ -55,7 +55,9 @@ int main () {
                 break;
             case 4: //add drink
                 drinksList.getFrom();
-                sortItOut(drinksList);
+                if(drinksList.getListSize() >= 2)
+                    sortItOut(drinksList);
+                it = drinksList.begin();
                 break;
             case 5: //remove drink
                 drinksList.remove(it);
