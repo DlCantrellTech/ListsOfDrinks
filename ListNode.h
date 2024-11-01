@@ -36,11 +36,11 @@ class ListNode
     //Getters
     ListNode<typNode>* getPrev();
     ListNode<typNode>* getNext();
-    typNode& getValue();
+    typNode* getValue();
     ListNode<typNode>* getCurrent();
 
     //Setters
-    void setValue(typNode value);
+    void setValue(typNode *value);
     void setPrev(ListNode *node);
     void setNext(ListNode *node);
 
@@ -73,8 +73,13 @@ ListNode<typNode>* ListNode<typNode>::getPrev() {
 }
 
 template <typename typNode>
-typNode& ListNode<typNode>::getValue() {
-   return *value;
+typNode* ListNode<typNode>::getValue() {
+   return value;
+}
+
+template <typename typNode>
+void ListNode<typNode>::setValue(typNode* value) {
+    this->value = value;
 }
 
 template <typename typNode>
