@@ -19,14 +19,16 @@ int main () {
     LinkedList<Drink>::Iterator it = drinksList.begin();
 
     do {
+        if(drinksList.getListSize() > 0) {
         // display current Drink and num drinks in library
-        cout << "------------------------------------------------------------------------------------------------------------------"
-             << "\n\tCurrent Drink:\n\n" << *it 
-             << "------------------------------------------------------------------------------------------------------------------"    
-             << "\n\n\tCurrent Number of Drinks in Library: " << drinksList.getListSize() << endl;
-        
+            cout << "------------------------------------------------------------------------------------------------------------------"
+                 << "\n\tCurrent Drink:\n\n" << *it 
+                 << "------------------------------------------------------------------------------------------------------------------"    
+                 << "\n\n\tCurrent Number of Drinks in Library: " << drinksList.getListSize() << endl;
+        } else
+            cout << "\n\t\tLibrary is currently empty. Please load or add drinks.\n\n";
         choice = displayMenuGetChoice();               // display main menu
-
+        
         switch(choice) {
             case 1: //print current library
                 if (drinksList.begin() != nullptr)
@@ -63,10 +65,12 @@ int main () {
                 drinksList.makeNew();
                 break;
             case 7: //change library
+                while(drinksList.begin() != drinksList.end())
+                    drinksList.remove(drinksList.begin());
+                drinksList.remove(drinksList.end());
                 drinksList.readIn();
                 sortItOut(drinksList);   
                 it = drinksList.begin();
-                //sortItOut(drinksList);
                 break;
             case 8: //exit program
                 cout << "\n\t\tExiting Program.\n";
