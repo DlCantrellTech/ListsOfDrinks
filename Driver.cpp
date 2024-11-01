@@ -7,8 +7,6 @@ using namespace std;
 //function prototypes
 int displayMenuGetChoice();
 int validateInt(string), validateInt(string, int, int);
-template <typename typNode>
-void sortItOut(LinkedList<typNode> listToSort);
 
 int main () {
     int choice;
@@ -22,7 +20,7 @@ int main () {
 
     do {
         // display current Drink and num drinks in library
-        if (drinksList.getHead() != NULL)
+        if (drinksList.begin() != nullptr)
         {
             cout << "\n" << drinksList << endl;
             cout << "\n\tCurrent Number of Drinks in Library: " << drinksList.getListSize() << endl;
@@ -109,18 +107,4 @@ int validateInt(string prompt, int high, int low) {
     }
 
     return num;
-}
-
-template <typename typNode>
-void sortItOut(LinkedList<typNode> listToSort)
-{
-    int ascending;
-
-    cout << "\n\t\tChoose sorting order (Alcohol %):\n";
-    cout << "\t\t1. Ascending\n";
-    cout << "\t\t2. Descending\n";
-    cout << "\t\tEnter your choice: ";
-    cin >> ascending;
-
-    listToSort.sortList(ascending);
 }
