@@ -29,6 +29,7 @@ int main () {
         {
             cout << "\n\t\tLibrary is Currently Empty!\n\n";
             drinksList.getFrom();
+            it = drinksList.begin();
         }
         
         // display main menu
@@ -63,6 +64,7 @@ int main () {
                 drinksList.makeNew();
                 drinksList.readIn();
                 it = drinksList.begin();
+                //sortItOut(drinksList);
                 break;
             case 6: //exit program
                 cout << "\n\t\tExiting Program.\n";
