@@ -400,8 +400,7 @@ void sortItOut(LinkedList<T>& listToSort)
         cin.ignore(1000, '\n');
     }
 
-    quickSort(listToSort, listToSort.head, listToSort.tail, (ascending==1));
-    //sortList(listToSort, ascending==1);
+    quickSort(listToSort, listToSort.head, listToSort.tail, (ascending==2));
 }
 
 template <typename typNode>
