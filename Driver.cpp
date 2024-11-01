@@ -79,7 +79,7 @@ int main () {
                 cout << "\n\t\tInvalid choice Please try again.\n";
         }
 
-    } while(choice != 6);
+    } while(choice != 8);
 
     return (0);
 }

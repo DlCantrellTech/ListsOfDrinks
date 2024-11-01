@@ -53,7 +53,6 @@ class LinkedList {
         void readIn();
         void makeNew();
 
-
         //getter
         int getListSize();
 
@@ -387,10 +386,10 @@ void sortItOut(LinkedList<T>& listToSort)
 {
     int ascending;
 
-    cout << "\n\t\tChoose sorting order (Alcohol %):\n";
-    cout << "\t\t1. Ascending\n";
-    cout << "\t\t2. Descending\n";
-    cout << "\t\tEnter your choice: ";
+    cout << "\n\t\tChoose sorting order (Alcohol %):\n"
+         << "\n\t\t1. Ascending\n"
+         << "\n\t\t2. Descending\n"
+         << "\n\t\tEnter your choice: ";
     
     while(!(cin >> ascending) || (ascending != 1 && ascending != 2)) {
         cout << "Error Try Again:\n\t\tChoose sorting order (Alcohol %):\n\t\t1. Ascending\n\t\t2. Descending\n\t\tEnter your choice: ";
@@ -417,8 +416,8 @@ void quickSort(LinkedList<typNode>& list, ListNode<typNode>* low, ListNode<typNo
 
 template <typename typNode>
 ListNode<typNode>* partition(LinkedList<typNode>& list, ListNode<typNode>* low, ListNode<typNode>* high, bool ascending) {
-    typNode* pivot = high->getValue();  // Use the value of the high node as the pivot
-    ListNode<typNode>* i = low;          // Start from the low end of the list
+    typNode* pivot = high->getValue();       // Use the value of the high node as the pivot
+    ListNode<typNode>* i = low;              // Start from the low end of the list
 
     for (ListNode<typNode>* j = low; j != high; j = j->getNext()) {
         // Determine if we should swap based on ascending or descending order
@@ -427,21 +426,21 @@ ListNode<typNode>* partition(LinkedList<typNode>& list, ListNode<typNode>* low, 
             if (i != j) {
                 // Swap values (pointers) of i and j
                 typNode* temp = i->getValue();
-                i->setValue(j->getValue()); // Use setValue to assign j's value to i
+                i->setValue(j->getValue());  // Use setValue to assign j's value to i
                 j->setValue(temp);           // Use setValue to assign temp (value of i) to j
             }
-            i = i->getNext();  // Move the i pointer forward
+            i = i->getNext();                // Move the i pointer forward
         }
     }
 
     // Swap the pivot with the i pointer
     if (i != high) {
         typNode* temp = i->getValue();
-        i->setValue(high->getValue()); // Use setValue to assign high's value to i
-        high->setValue(temp);           // Use setValue to assign temp (value of i) to high
+        i->setValue(high->getValue());       // Use setValue to assign high's value to i
+        high->setValue(temp);                // Use setValue to assign temp (value of i) to high
     }
 
-    return i;  // Return the new partition point
+    return i;                                // Return the new partition point
 }
 
 #endif
