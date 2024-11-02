@@ -36,9 +36,6 @@ class LinkedList {
         template <typename T>
         friend void sortItOut(LinkedList<T>& listToSort);
 
-        template <typename T>
-        friend void swapNodes(LinkedList<T>&, ListNode<T>*, ListNode<T>*);
-
     public:
         //constructors
         LinkedList();
@@ -426,8 +423,8 @@ ListNode<typNode>* partition(LinkedList<typNode>& list, ListNode<typNode>* low, 
             if (i != j) {
                 // Swap values (pointers) of i and j
                 typNode* temp = i->getValue();
-                i->setValue(j->getValue());  // Use setValue to assign j's value to i
-                j->setValue(temp);           // Use setValue to assign temp (value of i) to j
+                i->setValue(j->getValue());
+                j->setValue(temp);
             }
             i = i->getNext();                // Move the i pointer forward
         }
@@ -436,8 +433,8 @@ ListNode<typNode>* partition(LinkedList<typNode>& list, ListNode<typNode>* low, 
     // Swap the pivot with the i pointer
     if (i != high) {
         typNode* temp = i->getValue();
-        i->setValue(high->getValue());       // Use setValue to assign high's value to i
-        high->setValue(temp);                // Use setValue to assign temp (value of i) to high
+        i->setValue(high->getValue());      
+        high->setValue(temp);               
     }
 
     return i;                                // Return the new partition point
